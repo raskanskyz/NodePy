@@ -1,0 +1,5 @@
+<form [formGroup]="scriptForm" (ngSubmit)="save(scriptForm.value, scriptForm.valid)">
+  <input type="text" formControlName="scriptName" />
+  <textarea placeholder="paste python script here" formControlName="script"></textarea>
+  <button type="submit">Submit</button>
+</form>
