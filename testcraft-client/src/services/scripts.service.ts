@@ -22,7 +22,7 @@ export class ScriptsService {
           return this.getScripts()
         })
         .then((data: any) => {
-          this.subject.next({ scriptsList: data });
+          //this.subject.next({ scriptsList: data });
           resolve(data);
         })
         .catch((err) => console.log(err));
@@ -30,23 +30,23 @@ export class ScriptsService {
     return promise;
   }
 
-  // getScripts() {
-  //   let promise = new Promise((resolve, reject) => {
-  //     let apiURL = `${this.apiRoot}/getScripts`;
-  //     this.http.get(apiURL)
-  //       .toPromise()
-  //       .then((res: any) => {
-  //         this.subject.next({ currentSciptList: res });
-  //         resolve(res);
-  //       })
-  //       .catch(err => reject(err));
-  //   });
-  //   return promise;
-  // }
-
-  getScripts(): Observable<any> {
-    return this.subject.asObservable();
+  getScripts() {
+    let promise = new Promise((resolve, reject) => {
+      let apiURL = `${this.apiRoot}/getScripts`;
+      this.http.get(apiURL)
+        .toPromise()
+        .then((res: any) => {
+          this.subject.next({ currentSciptList: res });
+          resolve(res);
+        })
+        .catch(err => reject(err));
+    });
+    return promise;
   }
+
+  // getScripts(): Observable<any> {
+  //   return this.subject.asObservable();
+  // }
 
   execteScript(scriptName) {
     let promise = new Promise((resolve, reject) => {

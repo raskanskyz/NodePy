@@ -17,12 +17,11 @@ export class ScriptListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.scriptsService.getScripts().subscribe(scriptList => this.scriptList = scriptList);
-    // this.scriptsService.getScripts()
-    //   .then((res: any) => {
-    //     this.scriptList = res.scripts;
-    //   })
-    //   .catch(err => console.log(err));
+    this.scriptsService.getScripts()
+      .then((res: any) => {
+        this.scriptList = res.scripts;
+      })
+      .catch(err => console.log(err));
   }
 
   ngOnDestroy() {
