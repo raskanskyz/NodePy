@@ -14,6 +14,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ```
 
 # Known Issues
+  * __Python 2 scripts not supported__
   * Adding script with existing name overrides old script with current script
   * Tests missing on components
-  * scripts are added as files in memory (rather than persisting to a db)
+  * Scripts are added as files in memory (rather than persisting to a db)
