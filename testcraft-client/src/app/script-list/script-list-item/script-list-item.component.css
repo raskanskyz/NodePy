@@ -1,0 +1,30 @@
+.script-name{
+    width: 150px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    padding-right: 5px;
+}
+
+.item-container{
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.script-output{
+    margin-left: 5px;
+}
+
+.delete{
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 25px;
+    width: 18px;
+    background-color: red;
+    color: black;
+    text-align: center;
+    border: 1px solid black;
+}

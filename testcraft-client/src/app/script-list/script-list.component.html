@@ -1,3 +1,4 @@
-<div>
+<div class="script-list">
+  <div *ngIf="isDisplayPlaceholder">Available scripts will appear here</div>
   <app-script-list-item *ngFor="let script of scriptList" [data]="script"></app-script-list-item>
 </div>

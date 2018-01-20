@@ -8,6 +8,7 @@ import { ScriptContainerComponent } from './script-container/script-container.co
 import { ScriptListComponent } from './script-list/script-list.component';
 import { ScriptsService } from '../services/scripts.service';
 import { ScriptListItemComponent } from './script-list/script-list-item/script-list-item.component';
+import { ScriptOutputComponent } from './script-output/script-output.component';
 
 
 
@@ -16,7 +17,8 @@ import { ScriptListItemComponent } from './script-list/script-list-item/script-l
     AppComponent,
     ScriptContainerComponent,
     ScriptListComponent,
-    ScriptListItemComponent
+    ScriptListItemComponent,
+    ScriptOutputComponent
   ],
   imports: [
     BrowserModule,

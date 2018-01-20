@@ -1,61 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ScriptsService {
   apiRoot: string = `http://localhost:8080/api`;
-  private subject = new Subject<any>();
+  scriptList$$ = new ReplaySubject(1);
+  scriptOutput$$ = new ReplaySubject(1);
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  postScript(scriptName: string, scriptString: string) {
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = `${this.apiRoot}/postScript`;
-      this.http.post(apiURL, { scriptName: scriptName, script: scriptString })
-        .toPromise()
-        .then(res => {
-          return this.getScripts()
-        })
-        .then((data: any) => {
-          //this.subject.next({ scriptsList: data });
-          resolve(data);
-        })
-        .catch((err) => console.log(err));
-    });
-    return promise;
+  postScript(scriptName: string, scriptString: string): Observable<any> {
+    let apiURL = `${this.apiRoot}/postScript`;
+    return this.http.post(apiURL, { scriptName: scriptName, script: scriptString });
   }
 
-  getScripts() {
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = `${this.apiRoot}/getScripts`;
-      this.http.get(apiURL)
-        .toPromise()
-        .then((res: any) => {
-          this.subject.next({ currentSciptList: res });
-          resolve(res);
-        })
-        .catch(err => reject(err));
-    });
-    return promise;
+  getScripts(): Observable<any> {
+    let apiURL = `${this.apiRoot}/getScripts`;
+    return this.http.get(apiURL);
   }
 
-  // getScripts(): Observable<any> {
-  //   return this.subject.asObservable();
-  // }
+  execteScript(scriptName): Observable<any> {
+    let apiURL = `${this.apiRoot}/executeScript/${scriptName}`;
+    return this.http.get(apiURL);
+  }
 
-  execteScript(scriptName) {
-    let promise = new Promise((resolve, reject) => {
-      let apiURL = `${this.apiRoot}/executeScript/${scriptName}`;
-      this.http.get(apiURL)
-        .toPromise()
-        .then(res => resolve(res))
-        .catch(err => reject(err));
-    });
-    return promise;
+  deleteScript(scriptName): Observable<any> {
+    let apiURL = `${this.apiRoot}/deleteScript/${scriptName}`;
+    return this.http.delete(apiURL);
   }
 }

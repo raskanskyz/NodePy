@@ -1,0 +1,7 @@
+.container > section{
+    margin-bottom: 100px;
+}
+
+.container > section:nth-child(2){
+    border: 1px solid grey;
+}

@@ -2,7 +2,7 @@ import { version } from '../../package.json';
 import { Router } from 'express';
 import fs from 'fs';
 import { spawn } from 'child_process';
-import { runPy, postPy } from '../utils/utils';
+import { runPy, postPy, delPy } from '../utils/utils';
 var Promise = require("bluebird");
 const path = require("path");
 
@@ -28,7 +28,7 @@ export default ({ config, db }) => {
 		postPy(scriptName, script)
 			.then(() => {
 				res.json({
-					
+
 				});
 			})
 			.catch((err) => {
@@ -57,5 +57,19 @@ export default ({ config, db }) => {
 				});
 		});
 	});
+
+	api.delete('/deleteScript/:scriptName', (req, res) => {
+		const scriptName = req.params.scriptName;
+		delPy(scriptName)
+			.then(() => {
+				res.json({
+
+				});
+			})
+			.catch((err) => {
+				res.json({ err: err });
+			});
+	});
+
 	return api;
 }

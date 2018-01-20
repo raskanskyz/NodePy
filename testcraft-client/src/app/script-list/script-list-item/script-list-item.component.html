@@ -1,4 +1,7 @@
-<div>
-  {{data.name}} | {{data.isExecutable}}
-  <button (click)="data.isExecutable && execteScript(data.name)">Execute</button>
+<div class="item-container" [ngStyle]="{'color' : !data.isExecutable ? 'red' : 'green'}">
+  <span class="delete" (click)="deleteScript(data.name)">x</span>
+  <span class="script-name">{{data.name}}</span>
+  <div>
+    <button [disabled]="!data.isExecutable" (click)="data.isExecutable && execteScript(data.name)">Execute</button>
+  </div>
 </div>

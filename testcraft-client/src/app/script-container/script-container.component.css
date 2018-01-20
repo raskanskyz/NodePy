@@ -1,0 +1,14 @@
+.form{
+    display:flex;
+    flex-direction: column;
+}
+
+.script{
+    height: 250px;
+    resize: none;
+}
+
+.submit{
+    display: flex;
+    justify-content: flex-end;
+}

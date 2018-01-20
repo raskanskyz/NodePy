@@ -6,8 +6,6 @@ function runPy(scriptName) {
     return new Promise((resolve, reject) => {
         const pyprog = spawn('python', [path.join(__dirname, `../scripts/${scriptName}`)]);
 
-
-
         pyprog.on('exit', (data) => {
             const isExecutable = !data;
             if (isExecutable) {
@@ -34,7 +32,23 @@ function postPy(scriptName, script) {
     });
 }
 
+function delPy(scriptName) {
+    const scriptsPath = path.join(__dirname, `../scripts/${scriptName}`);
+    return new Promise((resolve, reject) => {
+        fs.unlink(scriptsPath, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                console.log('successfully deleted /tmp/hello');
+                resolve();
+            }
+        });
+    });
+}
+
 module.exports = {
     runPy: runPy,
-    postPy: postPy
+    postPy: postPy,
+    delPy: delPy
 }
