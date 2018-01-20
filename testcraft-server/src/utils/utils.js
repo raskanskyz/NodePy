@@ -5,11 +5,21 @@ const path = require("path");
 function runPy(scriptName) {
     return new Promise((resolve, reject) => {
         const pyprog = spawn('python', [path.join(__dirname, `../scripts/${scriptName}`)]);
-        pyprog.stdout.on('data', (data) => {
-            resolve({ name: scriptName, output: data.toString(), isExecutable: true });
-        });
-        pyprog.stderr.on('data', (data) => {
-            resolve({ name: scriptName, output: data.toString(), isExecutable: false });
+
+
+
+        pyprog.on('exit', (data) => {
+            const isExecutable = !data;
+            if (isExecutable) {
+                pyprog.stdout.on('data', (output) => {
+                    resolve({ name: scriptName, output: output.toString(), isExecutable: isExecutable });
+                });
+            }
+            else {
+                pyprog.stderr.on('data', (output) => {
+                    resolve({ name: scriptName, output: output.toString(), isExecutable: false });
+                });
+            }
         });
         return pyprog;
     });
